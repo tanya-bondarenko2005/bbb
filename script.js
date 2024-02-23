@@ -1,78 +1,67 @@
 
-let textColorToggle = false;
-let textInput = document.getElementById('textInput');
-let changeColorBtn = document.getElementById('changeColorBtn');
-
-changeColorBtn.addEventListener('click', function () {
-    if (!textColorToggle) {
-        textInput.value = 'текстовое поле';
-    } else {
-        textInput.style.color = textInput.style.color === 'red' ? 'blue' : 'red';
-    }
-
-    textColorToggle = !textColorToggle;
-});
+function updateOutput(value) {
+  document.getElementById("out").textContent = value;
+}
 
 
-
-let resetBtn = document.getElementById('resetBtn');
-
-resetBtn.addEventListener('click', function () {
-    let multilineText = document.getElementById('multilineText').value;
-    let searchString = prompt('Введите строку:');
-    if (multilineText.includes(searchString)) {
-        alert('Строка есть');
-    } else {
-        alert('Строка не найдена.');
-    }
-});
+function stopLink(event) {
+  event.preventDefault();
+}
 
 
-
-let myForm = document.getElementById('myForm');
-let submitBtn = document.querySelector('input[type="submit"]');
-let resultDiv = document.getElementById('result');
-
-myForm.addEventListener('submit', function (event) {
-    event.preventDefault(); 
-
-    let radioValue = document.querySelector('input[name="colorOption"]:checked');
-    // возвращает 1 элемент селектора
-    let checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-    let selectValue = document.getElementById('dependentSelect').value;
-
-    resultDiv.innerHTML = '';
-
-    if (radioValue) {
-        resultDiv.innerHTML += `Переключатель: ${radioValue.value}<br>`;
-    } else {
-        resultDiv.innerHTML += '<span class="error">Необходимо выбрать переключатель</span><br>';
-    }
-
-    if (checkboxes.length > 0) {
-        resultDiv.innerHTML += 'Флажки: ';
-        checkboxes.forEach(function (checkbox) {
-            resultDiv.innerHTML += `${checkbox.value}, `;
-            // индификатор
-        });
-        resultDiv.innerHTML = resultDiv.innerHTML.slice(0, -2) + '<br>';
-    } else {
-        resultDiv.innerHTML += '<span class="error">Необходим хотя бы один флажок</span><br>';
-    }
-
-    if (selectValue) {
-        resultDiv.innerHTML += `Выпадающий список: ${selectValue}<br>`;
-    } else {
-        resultDiv.innerHTML += '<span class="error">Необходим элемент в выпадающем списке</span><br>';
-    }
-
-    resultDiv.style.display = 'block';
-});
+function logEvent(event) {
+  console.log("Событие типа: " + event.type);
+}
 
 
+let link = document.getElementById("Link");
 
-let createAndClickBtn = document.getElementById('createAndClickBtn');
+link.addEventListener("click", stopLink);
+link.addEventListener("mouseover", logEvent);
+link.addEventListener("mouseout", logEvent);
+link.addEventListener("focus", logEvent);
 
-createAndClickBtn.addEventListener('click', function () {
-    submitBtn.dispatchEvent(new MouseEvent('click'));
-});
+
+function handleEvent(eventType, elementId, eventPhase) {
+  console.log("Событие " + eventType + " на элементе " + elementId + " на стадии " + eventPhase);
+}
+
+function addEventHandlers(elementId, eventType) {
+  let element = document.getElementById(elementId);
+
+  element.addEventListener(eventType, function(event) {
+      handleEvent(eventType, elementId, "всплытия");
+  });
+
+
+  element.addEventListener(eventType, function(event) {
+      handleEvent(eventType, elementId, "перехвата");
+  }, true);
+}
+
+for (let i = 1; i <= 5; i++) {
+  let elementId = "element" + i;
+  addEventHandlers(elementId, "click");
+  addEventHandlers(elementId, "mouseover"); 
+}
+
+function triggerUserEvent() {
+  let eventType = prompt("Введите тип события:");
+  let elementId = prompt("Введите id элемента:");
+  
+  let element = document.getElementById(elementId);
+  if (element) {
+
+      let event = new Event(eventType);
+      element.dispatchEvent(event);
+      // Объект события создали, выводим метод
+      
+  } else {
+      alert("Элемент с id '" + elementId + "' не найден.");
+  }
+}
+
+let triggerButton = document.createElement("button");
+triggerButton.textContent = "Сгенерировать пользовательское событие";
+triggerButton.addEventListener("click", triggerUserEvent);
+document.body.appendChild(triggerButton);
