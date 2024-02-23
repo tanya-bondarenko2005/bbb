@@ -5,19 +5,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="style.css" id="style1">
+  <link rel="stylesheet" type="text/css" href="style2.css" id="style2">
 </head>
 
 <body>
-  <label for="inputField">Введите текст: </label>
-    <input type="text" id="inputField" placeholder="текст" oninput="updateOutput(this.value)">
-    <div id="out"></div>
+  <form id="myForm">
+    <label for="firstName">Имя:</label>
+    <input type="text" id="firstName" name="firstName"><br>
 
-    <a href="https://mrk-bsuir.by" id="Link">Ссылка</a>
+    <label for="lastName">Фамилия:</label>
+    <input type="text" id="lastName" name="lastName"><br>
 
-    <div id="element1">Элемент 1</div>
-    <div id="element2">Элемент 2</div>
-    <div id="element3">Элемент 3</div>
-    <div id="element4">Элемент 4</div>
-    <div id="element5">Элемент 5</div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email"><br>
+
+    <button type="button" id="submitButton">Отправить</button>
+</form>
+
+<div id="warningMessage" class="warning" style="display:none;">
+    Пожалуйста, заполните все поля.
+</div>
+
+</div>
+  <script src="https://yastatic.net/jquery/2.2.0/jquery.min.js"></script>
   <script src="script.js"></script>
+  
 </html>
