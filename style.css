@@ -1,71 +1,51 @@
-@-moz-keyframes spin {
-    from { -moz-transform: rotate(0deg); }
-    to { -moz-transform: rotate(360deg); }
+/* Стили для первой строки и первого столбца */
+.salad-color {
+    background-color: #7fc06e; 
+    color: white;
 }
 
-@-webkit-keyframes spin {
-    from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(360deg); } 
-    /* управляет промежуточными шагами в последовательности анимации CSS, определяя стили для ключевых кадров последовательности анимации.  */
-}
-@keyframes spin {
-    from {transform:rotate(0deg);}
-    to {transform:rotate(360deg);}
+/* Стили для всех остальных ячеек */
+.turquoise-color {
+    background-color: #7f7f7f; 
+    color: white;
 }
 
-button.exclusive
-{
-  background-color: rgb(192, 61, 61);
-  background-image: linear-gradient(rgb(0, 154, 208), rgb(229, 127, 72));
-  border-radius: 5px;
-  color: #FFF;
-  cursor: pointer;
-  display: block;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 18px;
-  height: 51px;
-  line-height: 18px;
-  text-align: center;
-  text-shadow: 0 1px #85c329;
-  padding: 0 .5em;
+/* Стили для белых толстых границ */
+.my-table {
+    border-collapse: collapse;
+    border: 2px solid white;
 }
 
-button.exclusive:before
-{
-  font-family: "FontAwesome";
-   /* определяет список шрифтов в приоритете от высшего к низшему */
-  top: 0;
-  left: 0;
-  bottom: 0;
-  color: white;
-  font-size: 25px;
-  line-height: 47px;
-  text-shadow: 0 1px #015883;
-  content: "\f07a";
-  /* z-index: 2; */
-  width: 25px;
-  text-align: center;
-  border: none;
-  border-radius: 0;
-  display: inline-block;
+.my-table td {
+    border: 2px solid white;
+    padding: 8px;
 }
 
-button.exclusive:hover
-{
-      background-image: linear-gradient(#007ab7, #3aad3e);
+.toggle-container {
+    width: 80px;
+    height: 40px;
+    background-color: #33ab95;
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
 }
 
- button.exclusive.disabled:before */
- { 
-   content: "\f110";  
-  /* значения иконок  */
-  animation: 2s linear 0s normal none infinite spin;
-  -webkit-animation: 2s linear 0s normal none infinite spin;
-  -moz-animation: 2s linear 0s normal none infinite spin;
+.toggle-handle {
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    transition: transform 0.3s ease;
 }
 
+.on {
+    transform: translateX(40px);
+}
 
-button.exclusive.added:before
-{
-  content: "\f00c";
+.toggle-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
